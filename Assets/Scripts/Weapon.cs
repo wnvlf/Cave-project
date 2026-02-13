@@ -13,15 +13,12 @@ public class Weapon : MonoBehaviour
     public float speed;
     public float timer;
     PlayerMovement player;
-
-
-    private void Awake()
-    {
-        player = GameManager.instance.player;
-    }
+    Scanner scanner;
 
     public void Init(ItemData data)
     {
+        scanner = GameManager.instance.spawnUnit.GetComponent<Scanner>();
+        player = GameManager.instance.spawnUnit.GetComponent<PlayerMovement>();
         name = "Weapon " + data.itemId;
         transform.parent = player.transform;
         transform.localPosition = new Vector3(0.5f,0,0);
@@ -46,10 +43,10 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        if (!player.scanner.AttackTarget)
+        if (!scanner.AttackTarget)
             return;
 
-        Vector3 targetPos = player.scanner.AttackTarget.position;
+        Vector3 targetPos = scanner.AttackTarget.position;
         Vector3 dir = targetPos - transform.position;
         dir = dir.normalized;
 
