@@ -6,6 +6,7 @@ public class Unit : MonoBehaviour
     PlayerMovement movement;
     Scanner scanner;
     public int health;
+    public int bulletSpeed;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class Unit : MonoBehaviour
         movement.Movement = unitData.speed;
         scanner.AttackRange = unitData.range;
         health = unitData.health;
+        bulletSpeed = unitData.bulletSpeed;
     }
     
 }

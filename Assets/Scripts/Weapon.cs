@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
     public int count;
     public float speed;
     public float timer;
+    Unit unit;
     PlayerMovement player;
     Scanner scanner;
 
@@ -19,6 +20,7 @@ public class Weapon : MonoBehaviour
     {
         scanner = GameManager.instance.spawnUnit.GetComponent<Scanner>();
         player = GameManager.instance.spawnUnit.GetComponent<PlayerMovement>();
+        unit = player.gameObject.GetComponent<Unit>();
         name = "Weapon " + data.itemId;
         transform.parent = player.transform;
         transform.localPosition = new Vector3(0.5f,0,0);
@@ -54,13 +56,12 @@ public class Weapon : MonoBehaviour
 
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-
         bullet.rotation *= Quaternion.Euler(new Vector3(0, 0, 90));
 
         switch (id)
         {
             case 0:
-                bullet.GetComponent<Bullet>().Init(id, damage, count, dir);
+                bullet.GetComponent<Bullet>().Init(id, damage, count, dir, 5 * unit.bulletSpeed);
                 break;
         }
     }
