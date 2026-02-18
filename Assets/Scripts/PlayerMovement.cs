@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     Status status = Status.idle;
     Vector2 m_start;
     Vector2 m_goal;
+
+    Vector2Int m_startCenter;
+    Vector2 m_goalCenter;
     LinkedList<Vector2> m_fasterPath = new LinkedList<Vector2>();
 
     Animator anim;
@@ -23,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     BoxCollider2D boxCollider;
 
     public bool moveable = false;
+    public bool tileCenterMode = false;
 
     private void Awake()
     {
@@ -66,7 +70,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         m_start = transform.position;
-        m_goal = targetPosition;
+
+        if (tileCenterMode) m_goal = new Vector2((int)(targetPosition.x) + 0.5f,(int)(targetPosition.y) + 0.5f);
+        else m_goal = targetPosition;
+       
         ChangerStatus(Status.Move);
 
         m_fasterPath.Clear();
