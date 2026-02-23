@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SkillUIMananer : MonoBehaviour
 {
-    public Button CloseBtn;
+    GameObject Skill;
+    GameObject Dungeon;
+    GameObject DemonSkill;
 
-    private void Start()
+    public void OnLoadGameScene()
     {
-        CloseBtn.onClick.AddListener(() => SceneChanger.instance.LoadBattleScene());
+        SceneManager.LoadScene("GameScene");
     }
 
 }
